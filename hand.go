@@ -28,7 +28,7 @@ var GetAnswer = func(object any) error {
 // IsAnAnswer returns true if the answer supplied via GetAnswer should be
 // considered as one (cf. treated as "I don't know the answer").
 var IsAnAnswer = func(object any, err error) bool {
-	return err != nil
+	return err == nil
 }
 
 // HelpWith helps recover from errors.
@@ -43,7 +43,7 @@ func HelpWith[Arg1 any, Result any](f func(Arg1) (Result, error)) func(Arg1) (Re
 			return ret, fmt.Errorf("hand.Prompt() = %v; original error: %w", err, fErr)
 		}
 		if err := GetAnswer(&ret); IsAnAnswer(ret, err) {
-			return ret, fmt.Errorf("hand.GetAnswer() = %v; original error: %w", err, fErr)
+			return ret, nil
 		} else {
 			return ret, fmt.Errorf("hand.IsAnAnswer() = false, hand.GetAnswer() = %v; original error: %w", err, fErr)
 		}
