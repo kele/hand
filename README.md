@@ -33,4 +33,4 @@ hand: Fix?
 ```
 
 and you are expected to supply a JSON value and send `EndOfFile` (Ctrl+D in most
-terminals).
+terminals). That value will be now returned instead of the error.
